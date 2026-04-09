@@ -16,6 +16,7 @@ public class Lec04AggregatorDemo {
     public static void main(String[] args) throws Exception {
 
         // beans / singletons
+//        var executor = Executors.newThreadPerTaskExecutor(Thread.ofVirtual().name("VirtualThread", 1).factory());
         var executor = Executors.newVirtualThreadPerTaskExecutor();
         var aggregator = new AggregatorService(executor);
 
