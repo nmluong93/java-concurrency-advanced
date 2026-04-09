@@ -15,8 +15,8 @@ public class Lec02ThreadMethodsDemo {
     private static final Logger log = LoggerFactory.getLogger(Lec02ThreadMethodsDemo.class);
 
     public static void main(String[] args) throws InterruptedException {
-        join();
-        CommonUtils.sleep(Duration.ofSeconds(1));
+        interrupt();
+        CommonUtils.sleep(Duration.ofSeconds(5));
     }
 
     /*
