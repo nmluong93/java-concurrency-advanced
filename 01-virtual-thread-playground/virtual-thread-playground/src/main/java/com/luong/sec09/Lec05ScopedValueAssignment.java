@@ -1,8 +1,10 @@
 package com.luong.sec09;
 
+import com.luong.util.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.UUID;
 
 /*
@@ -15,16 +17,19 @@ public class Lec05ScopedValueAssignment {
 
     static void main(String[] args) {
 
-        authFilter(() -> orderController());
-        authFilter(() -> orderController());
+//        authFilter(() -> orderController());
+//        authFilter(() -> orderController());
 
+        Thread.ofVirtual().name("Request-1").start(() -> authFilter(() -> orderController()));
+        Thread.ofVirtual().name("Request-2").start(() -> authFilter(() -> orderController()));
+        CommonUtils.sleep(Duration.ofSeconds(1));
     }
 
     // below code is just to demonstrate the workflow
     // WebFilter
     private static void authFilter(Runnable runnable) {
         ScopedValue.where(SESSION_TOKEN, authenticate())
-                   .run(runnable);
+                .run(runnable);
     }
 
     // Security
